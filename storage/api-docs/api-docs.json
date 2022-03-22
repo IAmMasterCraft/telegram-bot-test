@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Telegram Bot",
+        "contact": {
+            "name": "Support Team",
+            "email": "support@localhost"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/subscribe": {
+            "post": {
+                "operationId": "/subscribe",
+                "responses": {
+                    "201": {
+                        "description": "Returns subscribed user array",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/message/{id}/{message}": {
+            "get": {
+                "operationId": "/message/id/message",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "description": "The message to be sent",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns status of message",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/message/all": {
+            "get": {
+                "operationId": "/message/all",
+                "responses": {
+                    "200": {
+                        "description": "Returns status of message",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

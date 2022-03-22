@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +61,11 @@ $app->singleton(
 
 $app->configure('app');
 
+/**
+ * Laravel Package Support
+ */
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -76,9 +81,9 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,9 +96,10 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -107,9 +113,11 @@ $app->configure('app');
 */
 
 $app->router->group([
-    'namespace' => 'App\Http\Controllers',
+    // 'namespace' => 'App\Http\Controllers',
+    'namespace' => 'App\Api\V1\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    // require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../app/Api/V1/routes.php';
 });
 
 return $app;
